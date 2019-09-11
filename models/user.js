@@ -4,10 +4,17 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   username: String,
-  password: String
+  passwordHash: String
 }, {
   timestamps: true
 });
+
+const signInStatic = require('./user-sign-in-static');
+const signUpStatic = require('./user-sign-up-static');
+
+userSchema.statics.signIn = signInStatic;
+userSchema.statics.signUp = signUpStatic;
+
 
 const User = mongoose.model('User', userSchema);
 
